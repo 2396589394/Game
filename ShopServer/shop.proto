@@ -1,7 +1,10 @@
 syntax = "proto3";
-package Hall;
+package Shop;
 
-service HallRPC
+message 
+
+service ShopRPC
 {
-    
+    rpc recharge() returns() {};
+    rpc withdrawCash() returns() {};
 }
