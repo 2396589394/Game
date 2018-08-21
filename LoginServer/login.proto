@@ -10,7 +10,12 @@ message Code
 // 个人信息
 message Info
 {
-    string token = 1;
+    string userId = 1;
+    string name = 2;
+    bool sex = 3;
+    string headimgurl = 4;
+    uint64 gold = 5;
+    string token = 6;
 }
 
 service LoginRPC
