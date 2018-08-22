@@ -1,14 +1,12 @@
 syntax = "proto3";
 package Login;
 
-// 第三方登陆授权code
 message  ThirdpartyRequest
 {
     string code = 1;
     uint32 mode = 2;
 }
 
-// 个人信息
 message  ThirdpartyResponse
 {
     string userId = 1;
