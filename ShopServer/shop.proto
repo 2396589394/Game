@@ -23,6 +23,6 @@ message WithdrawResponse
 
 service ShopRPC
 {
-    rpc recharge(RechargeRequest) returns(RechargeResponse) {};
-    rpc withdraw(WithdrawRequest) returns(WithdrawResponse) {};
+    rpc recharge(RechargeRequest) returns(RechargeResponse) {};     // 充值
+    rpc withdraw(WithdrawRequest) returns(WithdrawResponse) {};     // 提现
 }
