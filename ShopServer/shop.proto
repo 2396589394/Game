@@ -1,10 +1,28 @@
 syntax = "proto3";
 package Shop;
 
-message 
+message RechargeRequest
+{
+
+}
+
+message RechargeResponse
+{
+
+}
+
+message WithdrawRequest
+{
+
+}
+
+message WithdrawResponse
+{
+
+}
 
 service ShopRPC
 {
-    rpc recharge() returns() {};
-    rpc withdrawCash() returns() {};
+    rpc recharge(RechargeRequest) returns(RechargeResponse) {};
+    rpc withdraw(WithdrawRequest) returns(WithdrawResponse) {};
 }
