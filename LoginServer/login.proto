@@ -5,6 +5,7 @@ package Login;
 message  ThirdpartyRequest
 {
     string code = 1;
+    uint32 mode = 2;
 }
 
 // 个人信息
