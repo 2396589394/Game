@@ -2,13 +2,13 @@ syntax = "proto3";
 package Login;
 
 // 第三方登陆授权code
-message WechatRequest
+message ExternalRequest
 {
     string code = 1;
 }
 
 // 个人信息
-message WechatResponse
+message ExternalResponse
 {
     string userId = 1;
     string name = 2;
@@ -20,5 +20,5 @@ message WechatResponse
 
 service LoginRPC
 {
-    rpc weChat(WechatRequest) returns(WechatResponse) {}   // 微信登陆
+    rpc external(ExternalRequest) returns(ExternalResponse) {}   // 外部登陆
 }
