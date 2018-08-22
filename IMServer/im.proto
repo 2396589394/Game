@@ -3,5 +3,11 @@ package IM;
 
 service IMRPC
 {
-    
+    rpc getFriendsList() returns() {}
+    rpc getFriendInfo() returns() {}
+    rpc getChatRecord() returns() {}
+    rpc addFriend() returns() {}
+    rpc removeFriend() returns() {}
+    rpc writeMessage() returns() {}
+    rpc readMessage() returns() {}
 }
