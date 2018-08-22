@@ -2,13 +2,13 @@ syntax = "proto3";
 package Login;
 
 // 第三方登陆授权code
-message ExternalRequest
+message  ThirdpartyRequest
 {
     string code = 1;
 }
 
 // 个人信息
-message ExternalResponse
+message  ThirdpartyResponse
 {
     string userId = 1;
     string name = 2;
@@ -20,5 +20,5 @@ message ExternalResponse
 
 service LoginRPC
 {
-    rpc external(ExternalRequest) returns(ExternalResponse) {}   // 外部登陆
+    rpc  thirdparty(ThirdpartyRequest) returns(ThirdpartyResponse) {}   // 第三方登陆
 }
