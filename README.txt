@@ -1,5 +1,5 @@
 开发语言: golang
-网络协议: http2.0
+网络协议: http2.0 + tcp
 数据协议: protobuf
 缓存: Redis
 持久化存储: MySQL
