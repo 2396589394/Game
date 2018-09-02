@@ -7,7 +7,7 @@ message  ThirdpartyRequest
     uint32 mode = 2;
 }
 
-message  ThirdpartyResponse
+message  ThirdpartyReply
 {
     string userId = 1;
     string name = 2;
@@ -19,5 +19,5 @@ message  ThirdpartyResponse
 
 service LoginRPC
 {
-    rpc  thirdparty(ThirdpartyRequest) returns(ThirdpartyResponse) {}   // 第三方登陆
+    rpc  thirdparty(ThirdpartyRequest) returns(ThirdpartyReply) {}   // 第三方登陆
 }

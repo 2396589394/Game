@@ -1,4 +1,4 @@
-开发语言: golang
+开发语言: c++
 网络协议: http2.0 + tcp
 数据协议: protobuf
 缓存: Redis
