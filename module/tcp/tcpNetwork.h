@@ -11,8 +11,8 @@ private:
     boost::asio::thread_pool thread_pool_;
     boost::asio::ip::tcp::acceptor acceptor_;
     void(*task_)(boost::asio::ip::tcp::socket* socket);
-    std::atomic<bool> quit_;
     boost::asio::signal_set signals_;
+    std::atomic<bool> quit_;
 
 private:
     void listen();

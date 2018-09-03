@@ -1,4 +1,4 @@
-#include "tcpTcpNetwork.h"
+#include "tcpNetwork.h"
 #include <boost/bind.hpp>
 #include <signal.h>
 #include "log/log.h"
@@ -8,9 +8,14 @@ TcpNetwork::TcpNetwork(TcpNetConfig& config, void(*task)(boost::asio::ip::tcp::s
   thread_pool_(config.threadNumber - 1),
   acceptor_(io_context_, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), config.port)),
   task_(task),
-  signals_(io_context_)
+  signals_(io_context_),
+  quit_(false)
 {
-    signals_.add(SIGINT);
+    this->signals_.add(SIGINT);
+    this->signals_.async_wait(boost::bind([](std::atomic<bool>& quit){
+        quit = true;
+        Log::printf_info("Server is stopping");
+    }, this->quit_));
 
     for(int i = 0; i < config.threadNumber - 1; i++)
     {
@@ -31,7 +36,7 @@ TcpNetwork::˜TcpNetwork()
 void TcpNetwork::listen()
 {
     boost::asio::ip::tcp::socket* socket = new boost::asio::ip::tcp::socket(this->io_context_);
-    this->acceptor_.async_accept(*socket, boost::bind([this](boost::asio::ip::tcp::socket* socket, boost::system::error_code error){
+    this->acceptor_.async_accept(*socket, boost::bind([this](boost::asio::ip::tcp::socket* socket, boost::system::error_code& error){
         if(error)
         {
             Log::printf_warn(error.message().c_str());
