@@ -1,14 +1,17 @@
-#include "network.h"
+#include "tcpTcpNetwork.h"
 #include <boost/bind.hpp>
+#include <signal.h>
 #include "log/log.h"
 
-Network::Network(NetConfig& config, void(*task)(boost::asio::ip::tcp::socket* socket), std::atomic<bool>& quit)
+TcpNetwork::TcpNetwork(TcpNetConfig& config, void(*task)(boost::asio::ip::tcp::socket* socket))
 : io_context_(config.threadNumber),
   thread_pool_(config.threadNumber - 1),
   acceptor_(io_context_, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), config.port)),
   task_(task),
-  quit_(quit)
+  signals_(io_context_)
 {
+    signals_.add(SIGINT);
+
     for(int i = 0; i < config.threadNumber - 1; i++)
     {
         boost::asio::post(this->thread_pool_, boost::bind([](std::atomic<bool>& quit, boost::asio::io_context& io_context){
@@ -20,12 +23,12 @@ Network::Network(NetConfig& config, void(*task)(boost::asio::ip::tcp::socket* so
     }
 }
 
-Network::˜Network()
+TcpNetwork::˜TcpNetwork()
 {
     this->thread_pool_.join();
 }
 
-void Network::listen()
+void TcpNetwork::listen()
 {
     boost::asio::ip::tcp::socket* socket = new boost::asio::ip::tcp::socket(this->io_context_);
     this->acceptor_.async_accept(*socket, boost::bind([this](boost::asio::ip::tcp::socket* socket, boost::system::error_code error){
@@ -42,7 +45,7 @@ void Network::listen()
     }, socket, boost::asio::placeholders::error));
 }
 
-void Network::run()
+void TcpNetwork::run()
 {
     this->listen();
 
