@@ -13,8 +13,12 @@ public:
 	Mysql() = delete;
 	~Mysql() = delete;
 
-	static void init(MysqlConfig& config);
+	static bool init(MysqlConfig& config);
 	static void finit();
+
+	static bool query(MYSQL_RES* res, const char* format, ...);
+
+	static bool query(const char* format, ...);
 };
 
 #endif

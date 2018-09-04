@@ -13,8 +13,10 @@ public:
 	Redis() = delete;
 	~Redis() = delete;
 
-	static void init(RedisConfig& config);
+	static bool init(RedisConfig& config);
 	static void finit();
+
+	static void* command(const char* format, ...);
 };
 
 #endif
