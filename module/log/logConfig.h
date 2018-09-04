@@ -2,7 +2,7 @@
 #define __LOG_CONFIG_H__
 
 struct LogConfig{
-    char fileName[20];      // 日志输出文件名
+    char fileName[20];
 
     LogConfig(const char* configFile)
     {
